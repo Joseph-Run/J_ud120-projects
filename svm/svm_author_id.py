@@ -22,10 +22,34 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 ### your code goes here ###
+from sklearn import svm
+from sklearn.metrics import accuracy_score
+clf = svm.SVC(C = 1000, kernel= 'rbf', gamma= 1)
+print('C of 1000')
+# clf.fit(features_train, labels_train)
 
+# clf.predict(features_test)
+# features_train = features_train[:int(len(features_train)/100)]
+# labels_train = labels_train[:int(len(labels_train)/100)]
+
+t0 = time()
+clf.fit(features_train, labels_train)
+print("Training Time:", round(time()-t0, 3), "s")
+
+t0 = time()
+pred = clf.predict(features_test)
+print("Predicting Time:", round(time()-t0, 3), "s")
+accuracy = accuracy_score(pred, labels_test)
+print(accuracy)
 
 #########################################################
-
+# count = 0
+# for x in range(1700):
+#     if pred[x] == 1:
+#         count = count+1
+#     else:
+#         pass
+# print(count)
 #########################################################
 '''
 You'll be Provided similar code in the Quiz
